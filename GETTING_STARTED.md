@@ -121,8 +121,7 @@ Anthropic, not to us: Octave has no account of its own.
   over the box, and is read as soon as the step it is on is done; until then it can be taken back.
 - Point at a message of yours for two buttons: **Rewind** goes back to before it — the files the agent edited
   (not what its commands changed), the conversation, or both — and **Fork** goes on from there in a new conversation, this one left as it was.
-- A file opens in a tab. A markdown file can be written in, and saves on its own; `⌘E` goes between reading it
-  and writing in it. Any other file is read-only.
+- A file opens in a tab, to read: the agent writes the files, and git keeps them. `⌘F` finds in it.
 
 ## 5. What the agent may do
 
@@ -141,33 +140,14 @@ neither includes your code or prompts. Octave itself sends nothing about you. Oc
 version when it starts and every four hours. The full table, where every file is kept, and how to remove it
 all: [PRIVACY.md](PRIVACY.md).
 
-## 7. Coming from Obsidian
-
-Open your vault as it is; Obsidian can stay open on the same folder. What is drawn the way Obsidian draws it:
-
-| | |
-|---|---|
-| Links, tags, properties | `[[note]]`, `[[note#heading]]`, `#tag`, the properties at the top of a note |
-| Pictures | `![[photo.png]]`, `![[photo.png\|300]]`, `![alt](path.png)`. Paste or drop a picture and it is saved where your vault's attachment setting says — `attachments/` if it says nothing |
-| Embedded notes | `![[Note]]`, `![[Note#Heading]]`, `![[Note#^block]]`, kept current as the other note changes |
-| Tables | Drawn as tables. Inside one, `Tab` and `⇧Tab` move between cells, `↵` adds a row, and the columns are squared up when you leave |
-| PDFs | `[[paper.pdf]]` opens it, `[[paper.pdf#page=3]]` at that page |
-| Footnotes | `[^1]` and its note; type `[^` to pick one or start a new one, point at a number to read it |
-| Math | `$x^2$` and `$$` blocks |
-| The rest | Callouts, highlights, comments, task lists, `H~2~O`, `x^2^`, and a short list of HTML (`<u>`, `<kbd>`, `<details>` …) |
-
-As in Obsidian, the markup comes back when the cursor is in it. Not here yet: a list of the notes that link to
-the one you are in, plugins, and canvas.
-
-## 8. Keys
+## 7. Keys
 
 | | |
 |---|---|
 | `⌘⇧N` | New workspace |
 | `⌘O` | Open a repository |
 | `⌘P` | Open a file by name |
-| `⌘F` | Find and replace in the file |
-| `⌘E` | Read a markdown file, or write in it |
+| `⌘F` | Find in the file |
 | `⌥K` | Put what is chosen in the file in the message box |
 | `⌘↵` in the message box | Send |
 | Shift+Tab | Plan, or Execution |
@@ -177,7 +157,7 @@ the one you are in, plugins, and canvas.
 | `` ⌃` `` | A terminal, or the panel put away when one is in front |
 | `⌘,` | Settings |
 
-## 9. When something goes wrong
+## 8. When something goes wrong
 
 **Help › Report a Problem…** opens the folder Octave keeps its log in and a form on GitHub with your versions
 filled in. The app sends nothing itself — the log is yours to read over and drag in.

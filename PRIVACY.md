@@ -34,11 +34,9 @@ connected.
 |---|---|---|
 | `~/octave/repos/` | The repositories you cloned from GitHub | Octave, with git |
 | `~/octave/workspaces/<repository>/<city>/` | Each workspace: a git worktree of its repository, on a branch of its own. What the agent writes goes here, never into your own clone | Octave, with git |
-| `<workspace>/attachments/`, or where your vault's attachment setting says | Pictures pasted or dropped into a markdown file. Part of the workspace, committed like any file | you |
 | `<workspace>/.octave/attachments/` | What you pasted or dropped on the message box, one folder for each. Kept out of git | Octave |
 | `<workspace>/.context/` | What the agents in a workspace leave each other. Kept out of git | the agent |
 | `<workspace>/.octave/local/runs/` | What the repository's commands printed — setup, the dev server, the checks — one log each | Octave |
-| `<workspace>/.octave/local/properties.json` | The property types you chose | Octave |
 | `~/.claude/`, `~/.claude.json` | Claude Code's own: its settings, and the conversations, the plans the agent wrote and the copies of files it edited, which Claude Code removes after 30 days (`cleanupPeriodDays`). Shared with `claude` in a terminal if you use it | Claude Code |
 | The macOS Keychain | Your Claude sign-in | Claude Code |
 | `~/.octave/` | Octave's settings — your models, the conversations of each workspace — its log (`logs/server.log`), and Claude Code's binary (`claude/`), one folder a version | Octave |
