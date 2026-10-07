@@ -1,0 +1,18 @@
+# The landing page reads the latest release once an hour; a published release
+# asks Vercel to rebuild it now instead. Run by hand, it rebuilds the page as is.
+name: Redeploy landing
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: curl -fsS -X POST "$VERCEL_DEPLOY_HOOK"
