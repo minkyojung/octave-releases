@@ -80,9 +80,9 @@ CI, the README. Read it and fix it; it is a short file, and yours. What goes in 
 
 - `copy`, the files kept beside the code and out of git — `.env*` unless you say otherwise — brought over
   from the repository's own folder into every new workspace first. A file the branch already has is left alone.
-- `setup`, run in every new workspace before it opens — `npm ci`, say. Fails, and the workspace stays on the
-  list with what you typed; the dialog says why, and the **setup** row in the Run tab is marked failed, with
-  *Send to agent* and ▶ to run it again.
+- `setup`, run in every new workspace as it opens — `npm ci`, say. The **setup** row in the Run tab says it
+  is going, and what you typed reaches the agent once it is done. Fails, and your line goes to the message
+  box instead, with why; the row is marked failed, with *Send to agent* and ▶ to run it again.
 - `[[scripts.check]]`, one per check — `npm test` and the rest, what you would run before a pull request.
   Each is a row under **Checks** in the Run tab, with **Run checks** at the head to run them all in order and ▶
   on each to run that one; the row's mark says whether it passed, and one that failed offers *Send to agent*.
