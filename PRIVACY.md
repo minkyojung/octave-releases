@@ -21,6 +21,7 @@ table below says what that comes to here.
 | Octave starts, and every four hours after | GitHub Releases (`github.com/minkyojung/octave-releases`) | A request for the latest version number; then the update itself, if there is one |
 | You add a repository from GitHub | GitHub — through `gh` if you are signed in to it, else git | A request for the list of your repositories, and the clone of the one you choose |
 | A workspace is made | The repository's own remote (`origin`), and GitHub through `gh` | A fetch of its latest commits, and a request for your GitHub user name, which begins the workspace's branch name |
+| You make a workspace with words in the new workspace dialog | Anthropic, through Claude Code | Those words, for a small model to name the workspace's branch after. None of your files go with them, and no conversation is kept of it |
 | You choose Help › Report a Problem… | GitHub, in your browser | Only what you type and attach yourself. The app sends nothing |
 | Octave runs for the first time on this Mac, and the first time after an update that changes it | The npm registry (`registry.npmjs.org`), where Anthropic publishes Claude Code | A request for Claude Code's binary, the version the app was built against. The app does not carry it: it is kept in `~/.octave/claude/`, checked against the registry's checksum and Anthropic's signature, and run as published |
 
@@ -34,7 +35,7 @@ connected.
 |---|---|---|
 | `~/octave/repos/` | The repositories you cloned from GitHub | Octave, with git |
 | `~/octave/workspaces/<repository>/<city>/` | Each workspace: a git worktree of its repository, on a branch of its own. What the agent writes goes here, never into your own clone | Octave, with git |
-| `<workspace>/.octave/attachments/` | What you pasted or dropped on the message box, one folder for each. Kept out of git | Octave |
+| `<workspace>/.octave/attachments/` | What you pasted or dropped on the message box, and the conversations you added under **Add context from**, one folder for each. Kept out of git | Octave |
 | `<workspace>/.context/` | What the agents in a workspace leave each other. Kept out of git | the agent |
 | `<workspace>/.octave/local/runs/` | What the repository's commands printed — setup, the dev server, the checks — one log each | Octave |
 | `~/.claude/`, `~/.claude.json` | Claude Code's own: its settings, and the conversations, the plans the agent wrote and the copies of files it edited, which Claude Code removes after 30 days (`cleanupPeriodDays`). Shared with `claude` in a terminal if you use it | Claude Code |
@@ -46,6 +47,6 @@ connected.
 
 Dragging Octave to the Trash removes the app and nothing else. To remove the rest: `~/.octave/` and
 `~/Library/Application Support/Octave/` are Octave's alone. `~/.claude/`, `~/.claude.json` and the sign-in are
-Claude Code's — leave them if you use `claude` in a terminal. `.octave/local/` inside a workspace holds only logs and the property types you chose; delete it and nothing of yours is lost. `~/octave/` holds your clones and workspaces, which
+Claude Code's — leave them if you use `claude` in a terminal. `.octave/local/` inside a workspace holds only logs; delete it and nothing of yours is lost. `~/octave/` holds your clones and workspaces, which
 are git's: a workspace's branch may hold work that was never pushed, so look before deleting one, and after
 deleting its folder run `git worktree prune` in its repository.

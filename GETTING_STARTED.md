@@ -25,7 +25,7 @@ added to your list and nothing else happens: no workspace is made or opened unti
 A workspace is a folder and a branch of its own, made from the latest on the remote, under
 `~/octave/workspaces/`; the agent works there, and your own clone is never touched. The sidebar lists your
 repositories and their workspaces — and so does the first screen, until a workspace is open: click a workspace
-to move into it, + beside **Repositories** adds another repository, and `⌘O` opens a local one. Drag a
+to move into it, + beside **Workspaces** adds another repository, and `⌘O` opens a local one. Drag a
 repository's row to put the list in the order you want it in. Right-click one and **Take off the list…** when
 you are done with it: nothing on your disk is touched, and adding it again brings its workspaces back with it.
 
@@ -51,16 +51,16 @@ not committed would go with the folder, so you are told how many there are first
 dialog, where the key is their own — and the message box says which you are in. Plan is not a step you have to
 take: a small request is built without one.
 
-- **Plan** (the box filled grey, a map on its send button) is for seeing how the work will be done before any of it is. The agent reads,
+- **Plan** (its send button says **Plan**) is for seeing how the work will be done before any of it is. The agent reads,
   searches, and asks what it needs to know — a question takes the message box's place until you answer it —
   and then writes a plan. The plan is in the conversation, whole. **Approve plan**, over the message box, puts
   the agent to work on it; to have the plan changed, say what in the box instead. Nothing is changed.
 - **Execution** (the box as it always is) is where a conversation starts, and where the agent changes files and runs commands.
 
-The panel at the right is a row of tabs you open and close: **Changes**, the files changed and not committed —
-a file there opens what changed in it; a **terminal** for each shell; and **Run**, the repository's commands
-(below). Close one with its ×, and open one again, or another terminal, from the + at the end of the row.
-Which are open, and which is in front, is kept for the workspace. `⌘\` hides the panel and shows it; `` ⌃` ``
+The panel at the right is a row of tabs: **Changes**, the files changed and not committed —
+a file there opens what changed in it; **Run**, the repository's commands (below); and a **terminal** for each
+shell. Changes and Run are always there. Open another terminal from the + at the end of the row, and close one
+with its ×. Which terminals are open, and which tab is in front, is kept for the workspace. `⌘\` hides the panel and shows it; `` ⌃` ``
 brings a terminal to the front, and puts the panel away when one is in front already.
 
 The plan is a file where Claude Code keeps plans, in `~/.claude/plans/`. It is not in the workspace and does not go with the branch, and Claude Code removes it after 30 days, as it does the
@@ -70,7 +70,7 @@ What the agents in a workspace leave each other — notes, plans, what they foun
 folder, which every conversation there can read. It is not committed, and goes with the workspace when you
 archive it.
 
-To read a file as it is now, ⌘P finds any file in the repository and opens it in a tab — read-only, unless it is markdown — and from
+To read a file as it is now, ⌘P finds any file in the repository and opens it in a tab, and from
 there, in your own editor at the line you were reading.
 
 **A repository can say how it is worked in.** Octave makes a fresh folder for every workspace, and a fresh folder has
@@ -82,8 +82,12 @@ CI, the README. Read it and fix it; it is a short file, and yours. What goes in 
   from the repository's own folder into every new workspace first. A file the branch already has is left alone.
 - `setup`, run in every new workspace as it opens — `npm ci`, say. The **setup** row in the Run tab says it
   is going, and what you typed reaches the agent once it is done. Fails, and your line goes to the message
-  box instead, with why; the row is marked failed, with *Send to agent* and ▶ to run it again.
+  box instead, with why; the row is marked failed, with *Send to agent* and ▶ to run it again. A workspace
+  on the same code as the repository's own folder gets what setup made there copied over instead, in
+  seconds, and the row shows the copy; *Run setup again* always runs the command.
 - `[[scripts.check]]`, one per check — `npm test` and the rest, what you would run before a pull request.
+  A check with `when = "turn"` also runs as each turn ends that changed the code — keep that to the quick ones,
+  a typecheck or a lint — and shows in the Run tab; it is never sent back to the agent. Left out, none does.
   Each is a row under **Checks** in the Run tab, with **Run checks** at the head to run them all in order and ▶
   on each to run that one; the row's mark says whether it passed, and one that failed offers *Send to agent*.
 - `[scripts.run.dev]`, a dev server or a watcher, on a port of the workspace's own in `OCTAVE_PORT`: a row
@@ -111,7 +115,8 @@ Anthropic, not to us: Octave has no account of its own.
 ## 4. Ask
 
 - The conversation is a tab in the middle of the window, in a row with the files you open. Type `@` in the
-  message box to name a file and `/` for Claude Code's commands.
+  message box to name a file, or one of your Claude Code agents for Claude to hand the work to — they are listed
+  first — and `/` for Claude Code's commands.
 - Choose lines in a file and press `⌥K`: they go in the message box as that place, `@file#5-10`, and the agent
   reads those lines.
 - **PDFs and pictures.** Drop one on the message box, or type `@` and pick one in the workspace, and ask: the
@@ -119,6 +124,13 @@ Anthropic, not to us: Octave has no account of its own.
   pages at a time, which needs poppler installed (`brew install poppler`).
 - `↵` starts a new line in the message box, and `⌘↵` sends. A message sent while the agent is working waits
   over the box, and is read as soon as the step it is on is done; until then it can be taken back.
+- **Begin a conversation as one of your agents** from the ▾ beside the + over the conversations: it is that agent
+  from the start — its instructions, its tools, its model — as `claude --agent` is in a terminal. The agent is
+  chosen as the conversation begins; to change it, begin another. One whose file gives it a first instruction
+  starts on it as the conversation opens.
+- **`/loop 5m check the deploy`** runs a prompt again every five minutes in that conversation, for as long as
+  Octave is open — with its window closed too. The chip beside the model says a loop is set; ask Claude to stop
+  it. After Octave is opened again the loop is paused until you send a message there.
 - Point at a message of yours for two buttons: **Rewind** goes back to before it — the files the agent edited
   (not what its commands changed), the conversation, or both — and **Fork** goes on from there in a new conversation, this one left as it was.
 - A file opens in a tab, to read: the agent writes the files, and git keeps them. `⌘F` finds in it.
@@ -146,6 +158,7 @@ all: [PRIVACY.md](PRIVACY.md).
 |---|---|
 | `⌘⇧N` | New workspace |
 | `⌘O` | Open a repository |
+| `⌘1`…`9` | Go to the 1st…9th workspace of the sidebar |
 | `⌘P` | Open a file by name |
 | `⌘F` | Find in the file |
 | `⌥K` | Put what is chosen in the file in the message box |
