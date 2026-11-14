@@ -83,7 +83,7 @@ CI, the README. Read it and fix it; it is a short file, and yours. What goes in 
 - `setup`, run in every new workspace as it opens — `npm ci`, say. The **setup** row in the Run tab says it
   is going, and what you typed reaches the agent once it is done. Fails, and your line goes to the message
   box instead, with why; the row is marked failed, with *Send to agent* and ▶ to run it again. A workspace
-  on the same code as the repository's own folder gets what setup made there copied over instead, in
+  on the same code as one set up before — or as the repository's own folder — gets what setup made there copied over instead, in
   seconds, and the row shows the copy; *Run setup again* always runs the command.
 - `[[scripts.check]]`, one per check — `npm test` and the rest, what you would run before a pull request.
   A check with `when = "turn"` also runs as each turn ends that changed the code — keep that to the quick ones,
